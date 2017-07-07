@@ -10,10 +10,8 @@ const keyGestureMap = {
 };
 
 const onKeyUp = (event) => {
-    const gesture = keyGestureMap[event.key];
-    if(gesture) {
-        addToQueue(gesture);
-    }
+    const gesture = keyGestureMap[event.key] || Gestures.Invalid;
+    addToQueue(gesture);
 };
 
 document.addEventListener('keyup', onKeyUp);
