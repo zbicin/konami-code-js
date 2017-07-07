@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = {
     entry: {
         'konami-code': './index.js',
@@ -28,6 +30,9 @@ module.exports = {
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             include: /\.min\.js$/
-        })
+        }),
+        new CopyWebpackPlugin([
+            { from: 'lib/konami-code.js', to: '../docs/konami-code.js' }
+        ])
     ]
 };
