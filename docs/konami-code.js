@@ -225,10 +225,8 @@ var keyGestureMap = {
 };
 
 var onKeyUp = function onKeyUp(event) {
-    var gesture = keyGestureMap[event.key];
-    if (gesture) {
-        (0, _shared.addToQueue)(gesture);
-    }
+    var gesture = keyGestureMap[event.key] || _shared.Gestures.None;
+    (0, _shared.addToQueue)(gesture);
 };
 
 document.addEventListener('keyup', onKeyUp);

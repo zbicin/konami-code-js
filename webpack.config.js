@@ -32,7 +32,7 @@ module.exports = {
             include: /\.min\.js$/
         }),
         new CopyWebpackPlugin([
-            { from: 'lib/konami-code.js', to: '../docs/konami-code.js' }
+            { from: 'lib/konami-code.js', to: '../docs/konami-code.js', force: true }
         ])
     ]
 };
