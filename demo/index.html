@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>konami-code.js demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type="text/css">
+        body.rotate {
+            transition: transform 1s ease-in-out;
+            transform: rotateZ(360deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="jumbotron">
+                    <h1>konami-code.js demo</h1>
+                    <p>
+                        <a href="https://en.wikipedia.org/wiki/Konami_Code" target="_blank">What is the Konami Code?</a>
+                    </p>
+
+                    <h2>Using keyboard</h2>
+                    <pre>Hit: up, up, down, down, left, right, left, right, B, A</pre>
+                    <h2>Using touch screens</h2>
+                    <pre>Swipe: up, up, down, down, left, right, left, right</pre>
+                    <pre>Then tap screen: left half, right half</pre>.
+
+                    <h3>Input log</h3>
+                    <pre id="inputLog">(you haven't typed so far)</pre>
+                    <p>
+                        <small>If you make a mistake, just start over again.</small>
+                    </p>
+                    <hr>
+                    <p>
+                        <a class="btn btn-primary btn-lg" role="button" href="https://github.com/zbicin/konami-code">See project on GitHub</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../lib/konami-code.js"></script>
+
+    <script type="text/javascript">
+        var gestures = [];
+        var konamiCodeLength = 10;
+
+        function onLoad() {
+            document.body.focus();
+        }
+
+        function onTransitionEnd() {
+            document.body.classList.remove('rotate');
+            alert('Konami code!');
+        }
+
+        function onKonamiCode() {
+            document.body.addEventListener('transitionend', onTransitionEnd);
+            document.body.classList.add('rotate');
+        }
+
+        function onKonamiCodeGesture(event) {
+            var name = event.detail.name;
+            console.log('konamiCodeGesture: ' + name);
+            gestures.push(name.toLowerCase());
+            if (gestures.length > konamiCodeLength) {
+                gestures.shift();
+            }
+            document.getElementById('inputLog').innerHTML = gestures.join(', ');
+        }
+
+        document.addEventListener('load', onLoad);
+        document.addEventListener('konamiCode', onKonamiCode);
+        document.addEventListener('konamiCodeGesture', onKonamiCodeGesture);
+    </script>
+</body>
+
+</html>
