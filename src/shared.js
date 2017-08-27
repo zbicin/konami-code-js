@@ -11,7 +11,7 @@ const Gestures = {
 };
 mirrorObject(Gestures);
 
-const konamiCodeEvent = new Event('konamiCode');
+const konamiCodeEvent = new CustomEvent('konamiCode');
 
 const konamiCode = [
     Gestures.Up, Gestures.Up, Gestures.Down, Gestures.Down,
